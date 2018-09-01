@@ -31,20 +31,28 @@ void sortByArrival(int burst[], int arrival[], int n) {
 
 }
 
+int wt[10];
 int main() {
-    int burst[10] = {8, 5, 7, 8}, arrival[10] = {0, 2, 1, 3}, copyArrival[10];
-    int n=4, i, wait_t=0, turnaround_t=0, sum=0;
+    int burst[10] = {8, 5, 7, 4}, arrival[10] = {0, 2, 1, 3}, copyArrival[10];
+    int n=4, i, turnaround_t=0, sum=0, ws=0;
 
+    //copy array for keeping track of processes
     copyArray(arrival, copyArrival, n);
+
     sortByArrival(burst, arrival, n);
+
+    for(i=0; i<n; i++) {
+        wt[i] = ws;
+        ws += burst[i];
+        if(i>0) wt[i] -= arrival[i];
+    }
 
     printf("Process  Burst_Time  Arrival_Time  Waiting_Time  Turnaround_Time\n");
     for(i=0; i<n; i++) {
         turnaround_t += burst[i];
-        printf("\nP%d %11d %12d %13d %11d\n", copyArrival[i]+1 , burst[i], arrival[i], wait_t, turnaround_t);
+        printf("\nP%d %11d %12d %13d %11d\n", copyArrival[i]+1 , burst[i], arrival[i], wt[i], turnaround_t);
 
-        wait_t += burst[i];
-        sum += i<=2 ? wait_t : 0;
+        sum += wt[i];
     }
     printf("\nAverage waiting time: %.2f\n", sum/4.0);
 
