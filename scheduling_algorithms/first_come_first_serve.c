@@ -49,7 +49,7 @@ int main() {
 
     printf("Process  Burst_Time  Arrival_Time  Waiting_Time  Turnaround_Time\n");
     for(i=0; i<n; i++) {
-        turnaround_t += burst[i];
+        turnaround_t = burst[i] + wt[i];
         printf("\nP%d %11d %12d %13d %11d\n", copyArrival[i]+1 , burst[i], arrival[i], wt[i], turnaround_t);
 
         sum += wt[i];
