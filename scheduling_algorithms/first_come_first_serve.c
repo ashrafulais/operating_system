@@ -54,7 +54,7 @@ int main() {
 
         sum += wt[i];
     }
-    printf("\nAverage waiting time: %.2f\n", sum/4.0);
+    printf("\nAverage waiting time: %.2f\n", sum/(n*1.0));
 
 return 0;
 }
